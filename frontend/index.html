@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Froala + MathType demo</title>
+
+    <!-- Froala styles -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_style.min.css"
+    />
+
+    <!-- Demo styles -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Froala + MathType Plugin + Java backend services</h1>
+      <p class="hint">Use the MathType and Chemistry buttons in the toolbar.</p>
+
+      <div id="editor">Type here…</div>
+    </main>
+
+    <!-- Froala script -->
+    <script src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+
+    <!-- MathType core (renders formulas as images on target pages) -->
+    <script src="https://www.wiris.net/demo/plugins/app/WIRISplugins.js?viewer=image"></script>
+
+    <!-- MathType connector for Froala -->
+    <script src="https://cdn.jsdelivr.net/npm/@wiris/mathtype-froala@latest/wiris.js"></script>
+
+    <!-- Demo app -->
+    <script src="./app.js"></script>
+  </body>
+  </html>

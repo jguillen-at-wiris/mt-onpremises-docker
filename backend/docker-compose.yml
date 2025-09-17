@@ -1,0 +1,13 @@
+version: '1.0'
+
+services:
+  mathtype:
+    build:
+      context: .
+      dockerfile: Dockerfile.mathtype
+    container_name: mathtype
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./configurations/configuration.ini:/opt/configuration.ini
+

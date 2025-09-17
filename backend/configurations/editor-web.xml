@@ -1,0 +1,344 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee">
+    <description>WIRIS editor</description>
+
+    <context-param>
+        <description>Here goes the product key of the license.</description>
+        <param-name>com.wiris.editor.license.product.key</param-name>
+        <param-value>XXXXX-XXXXX-XXXXX-XXXXX-XXXX</param-value>
+        <!--<param-value></param-value>-->
+    </context-param>
+
+    <context-param>
+        <description>The memory limit of the text services by request, in megabytes.
+            If undefined or equal to 0, there is no limit.</description>
+        <param-name>com.wiris.editor.parse.memory.limit</param-name>
+        <param-value>60</param-value>
+    </context-param>
+
+    <context-param>
+        <description>Folder where the translations files are found. It is a
+            absolute or relative path to the webapp.</description>
+        <param-name>com.wiris.editor.langPath</param-name>
+        <param-value>lang</param-value>
+    </context-param>
+
+    <context-param>
+        <description>Storage mode of computed answers when using jsonp to avoid cross-domain security rules. Possible values are "static" and "session". It is recommended to use "static", since it does not need cookies, but it may cause problems on balanced environments. In that case, use "session" and ensure that your balanced environment is sharing sessions between servers.</description>
+        <param-name>com.wiris.editor.jsonpMode</param-name>
+        <param-value>static</param-value>
+    </context-param>
+
+    <context-param>
+        <description>File path to log the activity of the editor components. Leave empty to disable logging.</description>
+        <param-name>com.wiris.editor.log.file.path</param-name>
+        <param-value></param-value>
+    </context-param>
+
+    <context-param>
+        <description>URI Encoding. In case URIEncoding is set in server's configuration, this parameter must contain the same value.</description>
+        <param-name>com.wiris.editor.URIEncoding</param-name>
+        <param-value></param-value>
+    </context-param>
+
+    <context-param>
+        <description>Custom Font Adjust Path. Let the customer use a custom font adjust file.  Leave empty to use default values.</description>
+        <param-name>com.wiris.editor.customFontAdjustPath</param-name>
+        <param-value></param-value>
+    </context-param>
+
+    <context-param>
+        <description>Path to a file containing a list of newline-delimited origins that are allowed to use the services. Leave empty to allow everyone.
+            Every line must be formatted as scheme://subdomain.domain[:port]; default ports mustn't be specified (80 for http and 443 for https).
+        </description>
+        <param-name>com.wiris.editor.allowedOriginsFilePath</param-name>
+        <param-value></param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>MainFilter</filter-name>
+        <filter-class>com.wiris.servlet.filters.MainFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>DisableXSSProtectionFilter</filter-name>
+        <filter-class>com.wiris.servlet.filters.DisableXSSProtectionFilter</filter-class>
+    </filter>
+    <!-- Used internally by ScriptDispatcher -->
+    <!--<filter>
+        <filter-name>GzipFilter</filter-name>
+        <filter-class>com.wiris.servlet.filters.GzipFilter</filter-class>
+    </filter>-->
+
+    <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>com.wiris.servlet.filters.AccessFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>MainFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>DisableXSSProtectionFilter</filter-name>
+        <url-pattern>/resources/fonts/*</url-pattern>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+
+    <!-- Handled internally by ScriptDispatcher -->
+    <!--<filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>/editor</url-pattern>
+    </filter-mapping>-->
+
+    <servlet>
+        <servlet-name>RenderDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.RenderDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PngRenderDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.PngRenderDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SwfRenderDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.SwfRenderDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SvgRenderDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.SvgRenderDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PdfRenderDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.PdfRenderDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>EpsRenderDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.EpsRenderDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LatexToMathMLDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.LatexToMathMLDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MathMLToLatexDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.MathMLToLatexDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MathMLToInternalDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.MathMLToInternalDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MathMLToAccessibleDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.MathMLToAccessibleDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MathMLToContentDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.MathMLToContentDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ContentToMathMLDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.ContentToMathMLDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AccessibleToMathMLDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.AccessibleToMathMLDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>EvaluateDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.EvaluateDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>StatusDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.StatusDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>EditorScriptDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.EditorScriptDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ViewerScriptDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.ViewerScriptDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ComputedAnswerDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.ComputedAnswerDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>TickDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.TickDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LicenseDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.LicenseDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ResourceDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.ResourceDispatcher</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PingDispatcher</servlet-name>
+        <servlet-class>com.wiris.servlet.PingDispatcher</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RenderDispatcher</servlet-name>
+        <url-pattern>/render</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PngRenderDispatcher</servlet-name>
+        <url-pattern>/render.png</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SwfRenderDispatcher</servlet-name>
+        <url-pattern>/render.swf</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SvgRenderDispatcher</servlet-name>
+        <url-pattern>/render.svg</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PdfRenderDispatcher</servlet-name>
+        <url-pattern>/render.pdf</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EpsRenderDispatcher</servlet-name>
+        <url-pattern>/render.eps</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LatexToMathMLDispatcher</servlet-name>
+        <url-pattern>/latex2mathml</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MathMLToLatexDispatcher</servlet-name>
+        <url-pattern>/mathml2latex</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MathMLToInternalDispatcher</servlet-name>
+        <url-pattern>/mathml2internal</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MathMLToAccessibleDispatcher</servlet-name>
+        <url-pattern>/mathml2accessible</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MathMLToContentDispatcher</servlet-name>
+        <url-pattern>/mathml2content</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ContentToMathMLDispatcher</servlet-name>
+        <url-pattern>/content2mathml</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AccessibleToMathMLDispatcher</servlet-name>
+        <url-pattern>/accessible2mathml</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EvaluateDispatcher</servlet-name>
+        <url-pattern>/evaluate</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>StatusDispatcher</servlet-name>
+        <url-pattern>/status</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EditorScriptDispatcher</servlet-name>
+        <url-pattern>/editor</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ViewerScriptDispatcher</servlet-name>
+        <url-pattern>/viewer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ComputedAnswerDispatcher</servlet-name>
+        <url-pattern>/computedAnswer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TickDispatcher</servlet-name>
+        <url-pattern>/tick</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LicenseDispatcher</servlet-name>
+        <url-pattern>/license</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ResourceDispatcher</servlet-name>
+        <url-pattern>/resource</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PingDispatcher</servlet-name>
+        <url-pattern>/ping</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
+    <mime-mapping>
+        <extension>html</extension>
+        <mime-type>text/html</mime-type>
+    </mime-mapping>
+
+    <mime-mapping>
+        <extension>txt</extension>
+        <mime-type>text/plain</mime-type>
+    </mime-mapping>
+</web-app>

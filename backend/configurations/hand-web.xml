@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<configuration>
+    <appSettings>
+        <!-- Here goes the product key of the license. -->
+        <add key="com.wiris.hand.license.product.key" value="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"/>
+        <add key="com.wiris.hand.servlet.numServicesMathHand" value="6"/>
+        <add key="com.wiris.hand.servlet.numServicesMathHandArabic" value="1"/>
+        <add key="com.wiris.hand.servlet.numServicesMathPrinted" value="1"/>
+        <add key="com.wiris.hand.servlet.numServicesText" value="1"/>
+        <add key="com.wiris.hand.servlet.numServicesUnicode" value="1"/>
+        <add key="com.wiris.hand.servlet.maxNumberStrokesPerSample" value="75"/>
+        <add key="com.wiris.hand.servlet.maxNumberPointsPerSample" value="1500"/>
+
+        <!-- Methods to specify as allowed in a CORS preflight response. -->
+        <add key="com.wiris.hand.corsAllowMethods" value="GET,HEAD,POST,OPTIONS" />
+        <!-- Headers to specify as allowed in a CORS preflight response. -->
+        <add key="com.wiris.hand.corsAllowHeaders" value="" />
+    </appSettings>
+    <connectionStrings/>
+    <system.web>
+        <compilation debug="false">
+        </compilation>
+        <authentication mode="Windows"/>
+        <pages validateRequest="false"/>
+    </system.web>
+    <system.webServer>
+        <httpProtocol>
+            <customHeaders>
+                <add name="Access-Control-Allow-Origin" value="*"/>
+            </customHeaders>
+        </httpProtocol>
+    </system.webServer>
+    <location path="hand.js">
+        <system.webServer>
+            <httpProtocol>
+                <customHeaders>
+                    <add name="Cache-Control" value="no-cache" />
+                    <add name="Pragma" value="no-cache" />
+                </customHeaders>
+            </httpProtocol>
+        </system.webServer>
+    </location>
+</configuration>
