@@ -208,7 +208,7 @@ When contacting support, please include:
 
 ---
 
-**© 2025 Wiris** - MathType On-Premises Backend
+**© 2026 Wiris** - MathType On-Premises Backend
 
 
 

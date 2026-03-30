@@ -97,4 +97,4 @@ This project is licensed under the terms specified in the [LICENSE](LICENSE) fil
 
 ---
 
-**© 2025 Wiris** - MathType On-Premises Docker Solution
+**© 2026 Wiris** - MathType On-Premises Docker Solution
