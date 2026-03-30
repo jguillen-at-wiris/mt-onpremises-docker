@@ -36,12 +36,17 @@ cp /path/to/your/pluginwiris_engine.war mathtype-wars/
 docker compose up -d
 ```
 
-### 2. Test with Frontend Demo
+### 2. Test with Frontend Scenarios
 
 ```bash
-# Open the frontend demo
+# Navigate to frontend directory
 cd ../frontend/
-# Serve with any web server or open index.html directly in browser
+
+# Test Froala Editor integration (equation editing)
+# Open froala/index.html in your browser
+
+# Test Render Engine (MathML rendering)
+# Open render-engine/index.html in your browser
 ```
 
 ## 📁 Project Structure
@@ -52,22 +57,25 @@ mathtype-onpremises-docker/
 ├── LICENSE                      # Project license
 ├── backend/                     # Docker backend services
 │   ├── README.md               # Detailed backend setup instructions
-│   ├── docker-compose.yml     # Docker orchestration configuration
+│   ├── docker-compose.yml      # Docker orchestration configuration
 │   ├── Dockerfile.mathtype     # MathType services container definition
-│   ├── entrypoint.sh          # Container initialization script
-│   ├── configurations/        # Service configuration files
-│   │   ├── configuration.ini  # Integration services config
-│   │   ├── editor-web.xml     # Editor services config
-│   │   └── hand-web.xml       # Handwriting services config
-│   └── mathtype-wars/         # MathType WAR files location
+│   ├── entrypoint.sh           # Container initialization script
+│   ├── configurations/         # Service configuration files
+│   │   ├── configuration.ini   # Integration services config
+│   │   ├── editor-web.xml      # Editor services config
+│   │   └── hand-web.xml        # Handwriting services config
+│   └── mathtype-wars/          # MathType WAR files location
 │       ├── licensed_editor.war.placeholder
 │       ├── licensed_hand.war.placeholder
 │       └── pluginwiris_engine.war.placeholder
-└── frontend/                   # Demo web application
-    ├── README.md              # Frontend integration guide
-    ├── index.html             # Demo HTML page
-    ├── app.js                 # MathType-Froala integration
-    └── styles.css             # Demo styling
+└── frontend/                   # Frontend testing scenarios
+    ├── README.md               # Frontend setup guide
+    ├── styles.css              # Shared styling
+    ├── froala/                 # Equation editor scenario
+    │   ├── index.html          # Froala editor with MathType
+    │   └── app.js              # Editor configuration
+    └── render-engine/          # Rendering scenario
+        └── index.html          # MathML rendering demo
 ```
 
 ## 📖 Documentation

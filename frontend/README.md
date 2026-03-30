@@ -1,42 +1,80 @@
 # MathType On-Premises Frontend (Demo)
 
-This is a simple frontend demo showcasing the integration of MathType with the Froala Editor.
+Frontend demonstrations for MathType integration with multiple testing scenarios.
 
 ## Overview
 
-This demo demonstrates how to integrate MathType's mathematical formula editor with Froala Editor in a web application. The integration is configured to consume MathType SaaS as backend services by default, but also displays how to use a local Java backend running MathType services for formula processing and rendering, making it suitable for on-premises deployments where internet connectivity or cloud services are not available.
+This frontend folder contains multiple testing scenarios for MathType on-premises integration:
+
+- **Froala Editor Integration** (`froala/`): Complete equation editing experience with Froala WYSIWYG editor
+- **Render Engine** (`render-engine/`): MathML rendering and visualization without editing capabilities
+
+Both scenarios support:
+- **Cloud-based backend**: Uses MathType SaaS by default (no local setup required)
+- **Local on-premises backend**: Uses a Java backend running on localhost:8080 for self-hosted deployments
+
+This is essential for on-premises deployments where internet connectivity or cloud services are not available.
 
 ## Prerequisites
 
 - Modern web browser with JavaScript enabled
 - Local web server (optional, for serving files over HTTP)
-- On-premises backend: A running Java backend service (see `../backend/` directory)s
+- Optional: On-premises backend running (see `../backend/` directory)
 
-## Demo Files
+## Testing Scenarios
 
-This repository contains the minimal code required for a MathType-Froala integration:
+### 1. Froala Editor Integration (`froala/`)
 
-- **index.html**: The main HTML page that sets up the Froala editor with MathType integration. It includes:
-  - Froala Editor CSS and JavaScript libraries from CDN
-  - MathType core library for formula rendering
-  - MathType-Froala connector plugin
-  - Basic HTML structure with an editor container
+Full-featured equation editor integrated with Froala WYSIWYG editor.
 
-- **app.js**: JavaScript configuration file that initializes the Froala editor with MathType settings:
-  - Configures the editor height and toolbar buttons
-  - Sets up MathType and Chemistry editor buttons
-  - Configures HTML tags and attributes for mathematical formulas
-  - Comments how to point to a local Java backend service at `http://localhost:8080`
-  - Enables image editing with MathType tools
+**Files:**
+- **index.html**: Froala editor setup with MathType plugin
+- **app.js**: Froala initialization and MathType configuration
+- **styles.css**: Demo styling
 
-- **styles.css**: Basic CSS styling for the demo interface:
+**Features:**
+- Create and edit mathematical equations
+- Chemistry editor support
+- Image editing with MathType tools
+- Configurable to use cloud or local backend
+
+**Usage:**
+1. Open `froala/index.html` in a browser
+2. Use MathType/Chemistry buttons in toolbar to insert formulas
+3. Edit content directly in Froala editor
+
+### 2. Render Engine (`render-engine/`)
+
+MathML rendering demonstration showing how to display and convert mathematical content.
+
+**Files:**
+- **index.html**: Sample MathML content with rendering engine
+
+**Features:**
+- Render MathML as images or SVG
+- Display pre-formatted mathematical expressions
+- Test rendering pipeline without editing
+- Suitable for content viewers and documentation
+
+**Usage:**
+1. Open `render-engine/index.html` in a browser
+2. MathML formulas are automatically rendered
+3. Modify MathML in HTML source to test different equations
+
+## Common Files
+
+- **styles.css**: Shared styling for all demo scenarios
   - Modern typography using system fonts
   - Responsive container layout
-  - Clean, minimal styling for the demo page
+  - Clean, minimal styling
 
-## On-premises backend configuration
+## On-Premises Backend Configuration
 
-The integration is configured to use MathType SaaS by default. For it to point to a local Java backend running MathType services, the following settings need to be added in the `app.js` file:
+By default, all scenarios use MathType SaaS services from the cloud. To use a local Java backend running on your infrastructure:
+
+### Froala Integration
+
+Edit `froala/app.js` and uncomment/modify the `mathTypeParameters` section:
 
 ```javascript
 mathTypeParameters: {
@@ -45,6 +83,22 @@ mathTypeParameters: {
     server: 'java',
   },
 }
+```
+
+### Render Engine
+
+Edit `render-engine/index.html` and update the WIRISplugins.js script URL by toogling the commented line between the Local/Cloud MathType Render Engine scripts.
+
+### Verify Backend is Running
+
+Before using local backend, ensure the Docker backend is running:
+
+```bash
+cd ../backend/
+docker compose up -d
+
+# Test connectivity
+curl http://localhost:8080/pluginwiris_engine/app/configurationjs
 ```
 
 ## Troubleshooting

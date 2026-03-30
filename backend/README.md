@@ -37,7 +37,9 @@ Before setting up the MathType backend, ensure you have:
 
 - **Docker** and **Docker Compose** installed on your system
 - **Valid MathType license** with product keys
-- **MathType WAR files** (obtained after license purchase)
+- **MathType WAR files** (obtained after license purchase):
+  - **Javax-based WAR files**: Compatible with Apache Tomcat 9.x (current default base image)
+  - **Jakarta-based WAR files**: Require Apache Tomcat 10.1+ (update `Dockerfile.mathtype` base image accordingly)
 - Access to the configuration files in this repository
 
 ## Configuration Files
