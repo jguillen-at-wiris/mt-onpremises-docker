@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@wiris/mathtype-ckeditor5": "^8.15.2",
+    "ckeditor5": "^48.0.1"
+  },
+  "devDependencies": {
+    "vite": "^8.0.9"
+  }
+}
