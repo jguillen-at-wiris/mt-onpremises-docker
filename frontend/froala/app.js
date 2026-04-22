@@ -6,12 +6,12 @@
       htmlAllowedTags: ['.*'],
       htmlAllowedAttrs: ['.*'],
       htmlAllowedEmptyTags: ['mprescripts', 'none'],
-      // mathTypeParameters: {
-      //   serviceProviderProperties: {
-      //     URI: 'http://localhost:8080/pluginwiris_engine/app/configurationjs',
-      //     server: 'java',
-      //   },
-      // },
+      mathTypeParameters: {
+        serviceProviderProperties: {
+          URI: 'http://localhost:8080/pluginwiris_engine/app/configurationjs',
+          server: 'java',
+        },
+      },
       imageEditButtons: ['wirisEditor', 'wirisChemistry'],
     };
 
