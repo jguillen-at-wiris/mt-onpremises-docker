@@ -2,6 +2,8 @@
 
 This folder contains a small Vite demo for CKEditor 5 with MathType.
 
+If you want to use Wiris cloud services (`wiris.net`) instead of this on-prem backend, you can remove the custom `mathTypeParameters` block from `app.js` (or at least remove the custom `serviceProviderProperties`). MathType then falls back to its default cloud configuration.
+
 ## Run the frontend demo
 
 Use these steps once the backend is already running.
