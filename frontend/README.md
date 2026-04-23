@@ -45,6 +45,33 @@ Full-featured equation editor integrated with Froala WYSIWYG editor.
 2. Use MathType/Chemistry buttons in toolbar to insert formulas
 3. Edit content directly in Froala editor
 
+#### CKEditor 4 - Required plugin
+
+This demo requires the MathType CKEditor 4 plugin.
+
+Steps:
+1. Obtain the `ckeditor_wiris` plugin
+2. Copy it into:
+   frontend/ckeditor/vendor/ckeditor_wiris/
+
+Expected structure:
+frontend/ckeditor/vendor/ckeditor_wiris/plugin.js
+
+#### CKEditor 5 - Required MathType bundle
+
+This demo requires the MathType CKEditor 5 browser bundle.
+
+Steps:
+1. Install or obtain `@wiris/mathtype-ckeditor5`
+2. Copy contents of:
+   dist/browser/
+   into:
+   frontend/ckeditor5/mathtype/
+
+Expected files:
+- index.umd.js
+- index.css
+
 ### 2. Render Engine (`render-engine/`)
 
 MathML rendering demonstration showing how to display and convert mathematical content.
