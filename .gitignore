@@ -8,4 +8,10 @@
 frontend/ckeditor/vendor/
 frontend/ckeditor5/mathtype/
 
+# CKEditor 4 plugin (local only)
+frontend/ckeditor/vendor/
+
+# CKEditor 5 MathType bundle (local only)
+frontend/ckeditor5/mathtype/
+
 .vscode
