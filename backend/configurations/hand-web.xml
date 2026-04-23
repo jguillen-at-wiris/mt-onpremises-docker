@@ -1,43 +1,198 @@
-<?xml version="1.0"?>
-<configuration>
-    <appSettings>
-        <!-- Here goes the product key of the license. -->
-        <add key="com.wiris.hand.license.product.key" value="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"/>
-        <add key="com.wiris.hand.servlet.numServicesMathHand" value="6"/>
-        <add key="com.wiris.hand.servlet.numServicesMathHandArabic" value="1"/>
-        <add key="com.wiris.hand.servlet.numServicesMathPrinted" value="1"/>
-        <add key="com.wiris.hand.servlet.numServicesText" value="1"/>
-        <add key="com.wiris.hand.servlet.numServicesUnicode" value="1"/>
-        <add key="com.wiris.hand.servlet.maxNumberStrokesPerSample" value="75"/>
-        <add key="com.wiris.hand.servlet.maxNumberPointsPerSample" value="1500"/>
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee">
+	<description>MathType SDK Hand</description>
 
-        <!-- Methods to specify as allowed in a CORS preflight response. -->
-        <add key="com.wiris.hand.corsAllowMethods" value="GET,HEAD,POST,OPTIONS" />
-        <!-- Headers to specify as allowed in a CORS preflight response. -->
-        <add key="com.wiris.hand.corsAllowHeaders" value="" />
-    </appSettings>
-    <connectionStrings/>
-    <system.web>
-        <compilation debug="false">
-        </compilation>
-        <authentication mode="Windows"/>
-        <pages validateRequest="false"/>
-    </system.web>
-    <system.webServer>
-        <httpProtocol>
-            <customHeaders>
-                <add name="Access-Control-Allow-Origin" value="*"/>
-            </customHeaders>
-        </httpProtocol>
-    </system.webServer>
-    <location path="hand.js">
-        <system.webServer>
-            <httpProtocol>
-                <customHeaders>
-                    <add name="Cache-Control" value="no-cache" />
-                    <add name="Pragma" value="no-cache" />
-                </customHeaders>
-            </httpProtocol>
-        </system.webServer>
-    </location>
-</configuration>
+	<context-param>
+		<description>Here goes the product key of the license.</description>
+		<param-name>com.wiris.hand.license.product.key</param-name>
+		<param-value>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>com.wiris.hand.accessControlAllowOrigin</param-name>
+		<param-value>*</param-value>
+	</context-param>
+
+	<context-param>
+        <param-name>com.wiris.hand.servlet.maxNumberPointsPerSample</param-name>
+        <param-value>1500</param-value>
+    </context-param>
+	
+	<context-param>
+        <param-name>com.wiris.hand.servlet.maxNumberStrokesPerSample</param-name>
+        <param-value>75</param-value>
+    </context-param>
+
+	<context-param>
+        <param-name>com.wiris.hand.servlet.numServicesMath</param-name>
+        <param-value>5</param-value>
+    </context-param>
+
+	<context-param>
+        <param-name>com.wiris.hand.servlet.numServicesMathArabic</param-name>
+        <param-value>1</param-value>
+    </context-param>
+    
+	<context-param>
+        <param-name>com.wiris.hand.servlet.numServicesMathPrinted</param-name>
+        <param-value>1</param-value>
+    </context-param>
+	
+	<context-param>
+        <param-name>com.wiris.hand.servlet.numServicesText</param-name>
+        <param-value>1</param-value>
+    </context-param>
+	
+	<context-param>
+        <param-name>com.wiris.hand.servlet.numServicesUnicode</param-name>
+        <param-value>1</param-value>
+    </context-param>
+	
+	<servlet>
+		<servlet-name>StrokesToMathMLDispatcher</servlet-name>
+		<servlet-class>com.wiris.hand.servlet.StrokesToMathMLDispatcher</servlet-class>
+		<load-on-startup>1</load-on-startup> <!-- Load after LicenseDispatcher -->
+	</servlet>
+	
+	<!-- We should get rid of this service and use only strokes2mathml -->
+	<servlet-mapping>
+		<servlet-name>StrokesToMathMLDispatcher</servlet-name>
+		<url-pattern>/recognize</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>StrokesToMathMLDispatcher</servlet-name>
+		<url-pattern>/strokes2mathml</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PngToMathMLDispatcher</servlet-name>
+		<servlet-class>com.wiris.hand.servlet.PngToMathMLDispatcher</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PngToMathMLDispatcher</servlet-name>
+		<url-pattern>/png2mathml</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StrokesToTextDispatcher</servlet-name>
+		<servlet-class>com.wiris.hand.servlet.StrokesToTextDispatcher</servlet-class>
+		<load-on-startup>1</load-on-startup> <!-- Load after LicenseDispatcher -->
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>StrokesToTextDispatcher</servlet-name>
+		<url-pattern>/strokes2text</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StrokesToUnicodeDispatcher</servlet-name>
+		<servlet-class>com.wiris.hand.servlet.StrokesToUnicodeDispatcher</servlet-class>
+		<load-on-startup>1</load-on-startup> <!-- Load after LicenseDispatcher -->
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>StrokesToUnicodeDispatcher</servlet-name>
+		<url-pattern>/strokes2unicode</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WirisHandTest</servlet-name>
+		<servlet-class>com.wiris.hand.WirisHandTest</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>WirisHandTest</servlet-name>
+		<url-pattern>/runtest</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WirisHandTick</servlet-name>
+		<servlet-class>com.wiris.hand.TickDispatcher</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>WirisHandTick</servlet-name>
+		<url-pattern>/tick</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LicenseDispatcher</servlet-name>
+		<servlet-class>com.wiris.hand.LicenseDispatcher</servlet-class>
+		<load-on-startup>0</load-on-startup> <!-- Required -->
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LicenseDispatcher</servlet-name>
+		<url-pattern>/license</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StatusDispatcher</servlet-name>
+		<servlet-class>com.wiris.hand.StatusDispatcher</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>StatusDispatcher</servlet-name>
+		<url-pattern>/status</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+		<listener-class>com.wiris.hand.servlet.StrokesToMathMLDispatcher</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>MainFilter</filter-name>
+		<filter-class>com.wiris.hand.filters.MainFilter</filter-class>
+
+		<init-param>
+			<description>Methods to specify as allowed in a CORS preflight response.</description>
+			<param-name>com.wiris.hand.corsAllowMethods</param-name>
+			<param-value>GET,HEAD,POST,OPTIONS</param-value>
+		</init-param>
+
+		<init-param>
+			<description>Headers to specify as allowed in a CORS preflight response.</description>
+			<param-name>com.wiris.hand.corsAllowHeaders</param-name>
+			<param-value></param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>CacheFilter</filter-name>
+		<filter-class>com.wiris.hand.filters.CacheFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>MainFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>/hand.js</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+	<session-config>
+		<session-timeout>35</session-timeout>
+	</session-config>
+
+	<mime-mapping>
+		<extension>html</extension>
+		<mime-type>text/html</mime-type>
+	</mime-mapping>
+	
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>text/plain</mime-type>
+	</mime-mapping>
+</web-app>

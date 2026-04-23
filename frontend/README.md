@@ -6,6 +6,8 @@ Frontend demonstrations for MathType integration with multiple testing scenarios
 
 This frontend folder contains multiple testing scenarios for MathType on-premises integration:
 
+- **CKEditor 4 Editor Integration** (`ckeditor4/`): Complete equation editing experience with CKEditor 4 WYSIWYG editor
+- **CKEditor 5 Editor Integration** (`ckeditor5/`): Complete equation editing experience with CKEditor 5 WYSIWYG editor
 - **Froala Editor Integration** (`froala/`): Complete equation editing experience with Froala WYSIWYG editor
 - **Render Engine** (`render-engine/`): MathML rendering and visualization without editing capabilities
 
@@ -23,13 +25,13 @@ This is essential for on-premises deployments where internet connectivity or clo
 
 ## Testing Scenarios
 
-### 1. Froala Editor Integration (`froala/`)
+### 1. CKEditor4/CKEditor5/Froala Editor Integration
 
 Full-featured equation editor integrated with Froala WYSIWYG editor.
 
 **Files:**
-- **index.html**: Froala editor setup with MathType plugin
-- **app.js**: Froala initialization and MathType configuration
+- **index.html**: Editor setup with MathType plugin
+- **app.js**: Editor initialization and MathType configuration
 - **styles.css**: Demo styling
 
 **Features:**
@@ -39,7 +41,7 @@ Full-featured equation editor integrated with Froala WYSIWYG editor.
 - Configurable to use cloud or local backend
 
 **Usage:**
-1. Open `froala/index.html` in a browser
+1. Open `ckeditor4/index.html`, `ckeditor5/index.html` or `froala/index.html` in a browser
 2. Use MathType/Chemistry buttons in toolbar to insert formulas
 3. Edit content directly in Froala editor
 
@@ -72,9 +74,9 @@ MathML rendering demonstration showing how to display and convert mathematical c
 
 By default, all scenarios use MathType SaaS services from the cloud. To use a local Java backend running on your infrastructure:
 
-### Froala Integration
+### CKEditor4/CKEditor5/Froala Integration
 
-Edit `froala/app.js` and uncomment/modify the `mathTypeParameters` section:
+Edit `/app.js` and uncomment/modify the `mathTypeParameters` section:
 
 ```javascript
 mathTypeParameters: {

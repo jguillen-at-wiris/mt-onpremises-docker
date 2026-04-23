@@ -7,7 +7,10 @@ A complete Docker-based deployment solution for running MathType services on-pre
 This repository contains everything needed to deploy MathType services in a containerized environment, eliminating the need for cloud-based SaaS dependencies. The solution consists of:
 
 - **Backend Services**: Docker-containerized MathType services (Editor, Integration, and Handwriting recognition)
-- **Frontend Demo**: A sample web application demonstrating MathType integration with Froala Editor
+- **Frontend Demo**: A sample web application demonstrating MathType integration with different editors:
+    - Froala
+    - CKEditor 4
+    - CKEditor 5
 - **Configuration**: Pre-configured settings for enterprise deployment
 
 ## 🚀 Quick Start
@@ -17,6 +20,8 @@ This repository contains everything needed to deploy MathType services in a cont
 - Docker and Docker Compose installed
 - Valid MathType license with product keys
 - MathType WAR files (provided after license purchase)
+
+> 💡 **Windows users**: Ensure `backend/entrypoint.sh` uses **LF line endings** (not CRLF), otherwise the container may fail to start.
 
 ### 1. Setup Backend Services
 
@@ -36,7 +41,19 @@ cp /path/to/your/pluginwiris_engine.war mathtype-wars/
 docker compose up -d
 ```
 
+#### Verify backend
+
+Open in your browser:
+
+```bash
+http://localhost:8080/pluginwiris_engine/app/configurationjs
+```
+
+You should see a JSON response.
+
 ### 2. Test with Frontend Scenarios
+
+> 💡 **IMPORTANT**: Do NOT open HTML files using file://. You must serve the frontend/ directory over HTTP.
 
 ```bash
 # Navigate to frontend directory
@@ -45,9 +62,17 @@ cd ../frontend/
 # Test Froala Editor integration (equation editing)
 # Open froala/index.html in your browser
 
+# Test CKEditor4 Editor integration (equation editing)
+# Open ckeditor4/index.html in your browser
+
+# Test CKEditor5 Editor integration (equation editing)
+# Open ckeditor5/index.html in your browser
+
 # Test Render Engine (MathML rendering)
 # Open render-engine/index.html in your browser
 ```
+
+### 3. 
 
 ## 📁 Project Structure
 
@@ -71,12 +96,35 @@ mathtype-onpremises-docker/
 └── frontend/                   # Frontend testing scenarios
     ├── README.md               # Frontend setup guide
     ├── styles.css              # Shared styling
+    ├── ckeditor4/              # Equation editor scenario
+    │   ├── index.html          # Froala editor with MathType
+    │   └── app.js              # Editor configuration
+    ├── ckeditor5/              # Equation editor scenario
+    │   ├── index.html          # Froala editor with MathType
+    │   └── app.js              # Editor configuration
     ├── froala/                 # Equation editor scenario
     │   ├── index.html          # Froala editor with MathType
     │   └── app.js              # Editor configuration
     └── render-engine/          # Rendering scenario
         └── index.html          # MathML rendering demo
 ```
+
+### Frontend Notes
+
+#### CKEditor 4
+
+- Uses external plugin (ckeditor_wiris)
+- Loaded via CKEDITOR.plugins.addExternal
+
+#### CKEditor 5
+
+- Uses CDN + local MathType bundle
+- Requires a valid CKEditor 5 license (for CDN usage)
+
+#### Froala
+
+- Uses CDN + MathType plugin
+- Supports both cloud and on-prem rendering
 
 ## 📖 Documentation
 

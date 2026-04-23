@@ -5,7 +5,7 @@
     <context-param>
         <description>Here goes the product key of the license.</description>
         <param-name>com.wiris.editor.license.product.key</param-name>
-        <param-value>XXXXX-XXXXX-XXXXX-XXXXX-XXXX</param-value>
+        <param-value>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</param-value>
         <!--<param-value></param-value>-->
     </context-param>
 
