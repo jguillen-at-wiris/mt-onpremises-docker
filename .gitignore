@@ -1,2 +1,11 @@
+# WAR files
 *.war
+
+# Local configs
+*.env
+
+# Optional vendor 
+frontend/ckeditor/vendor/
+frontend/ckeditor5/mathtype/
+
 .vscode
