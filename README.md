@@ -7,7 +7,7 @@ A complete Docker-based deployment solution for running MathType services on-pre
 This repository contains everything needed to deploy MathType services in a containerized environment, eliminating the need for cloud-based SaaS dependencies. The solution consists of:
 
 - **Backend Services**: Docker-containerized MathType services (Editor, Integration, and Handwriting recognition)
-- **Frontend Demo**: A sample web application demonstrating MathType integration with Froala Editor
+- **Frontend Demos**: Sample web applications demonstrating MathType integration with Froala, TinyMCE, CKEditor 4, CKEditor 5, and the Render Engine
 - **Configuration**: Pre-configured settings for enterprise deployment
 
 ## 🚀 Quick Start
@@ -49,6 +49,33 @@ cd ../frontend/
 # Open render-engine/index.html in your browser
 ```
 
+### 2. Test with Frontend Scenarios
+
+```bash
+# Navigate to frontend directory
+cd ../frontend/
+
+# Serve the frontend demos
+python -m http.server 3000
+```
+
+Open one of the available demos in your browser:
+
+- Froala: http://localhost:3000/froala/
+- TinyMCE: http://localhost:3000/tinymce/
+- CKEditor 4: http://localhost:3000/ckeditor4/
+- Render Engine: http://localhost:3000/render-engine/
+
+For the CKEditor 5 demo:
+
+```bash
+cd ckeditor
+npm install
+npm run dev
+```
+
+Then open the URL displayed by Vite.
+
 ## 📁 Project Structure
 
 ```
@@ -71,11 +98,11 @@ mathtype-onpremises-docker/
 └── frontend/                   # Frontend testing scenarios
     ├── README.md               # Frontend setup guide
     ├── styles.css              # Shared styling
-    ├── froala/                 # Equation editor scenario
-    │   ├── index.html          # Froala editor with MathType
-    │   └── app.js              # Editor configuration
-    └── render-engine/          # Rendering scenario
-        └── index.html          # MathML rendering demo
+    ├── froala/                 # Froala editor demo
+    ├── tinymce/                # TinyMCE editor demo
+    ├── ckeditor4/              # CKEditor 4 editor demo
+    ├── ckeditor/               # CKEditor 5 editor demo
+    └── render-engine/          # MathML rendering demo
 ```
 
 ## 📖 Documentation
