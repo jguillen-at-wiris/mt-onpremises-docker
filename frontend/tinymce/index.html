@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TinyMCE + MathType demo</title>
+
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+    <main class="container">
+        <h1>TinyMCE + MathType Plugin + Java backend services</h1>
+        <p class="hint">Use the MathType and Chemistry buttons in the toolbar.</p>
+
+        <textarea id="editor">Type here…</textarea>
+    </main>
+
+    <!-- TinyMCE -->
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js"></script>
+
+    <!-- Cloud MathType Render Engine (renders formulas as images on target pages) -->
+    <script src="https://www.wiris.net/demo/plugins/app/WIRISplugins.js?viewer=image"></script>
+    <!-- Local MathType Render Engine (renders formulas as images on target pages) -->
+    <!-- <script src="http://localhost:8080/pluginwiris_engine/app/WIRISplugins.js?viewer=image"></script> -->
+
+    <!-- Demo app -->
+    <script src="./app.js"></script>
+</body>
+
+</html>
